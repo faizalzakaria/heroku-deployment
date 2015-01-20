@@ -1,0 +1,17 @@
+tasks: [ 'service1' ]
+---
+:service1:
+  :github: 'git@github.com:faizalzakaria/fbox.git'
+  :branch: 'master'
+  :staging:
+    :accounts:
+      - :name: 'staging'
+        :apps:
+          - 'staging-123'
+  :production:
+    :accounts:
+      - :name: 'production'
+        :apps:
+          - 'production-1'
+          - 'production-2'
+          - 'production-3'
