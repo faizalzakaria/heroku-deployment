@@ -88,7 +88,7 @@ namespace :config do
         def envs(envs)
           output = ""
           envs.each_pair do |key, val|
-            output << " #{key}='#{val}'"
+            output << " #{key}=\"#{val}\""
           end
           output
         end
