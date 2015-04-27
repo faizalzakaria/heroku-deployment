@@ -22,6 +22,18 @@ def heroku_command(account_name, apps, command)
   end
 end
 
+def heroku_build_ps_scale(scales, command)
+  scales.inject('') { |m, v| m << "#{v}=#{command} " }
+end
+
+def heroku_stop_apps(account_name, account_apps, scales)
+  heroku_command(account_name, account_apps, "ps:scale #{heroku_build_ps_scale(scales, '0')}")
+end
+
+def heroku_start_apps(account_name, account_apps, scales)
+  heroku_command(account_name, account_apps, "ps:scale #{heroku_build_ps_scale(scales, '1')}")
+end
+
 def heroku_switch(name)
   cmd = "heroku accounts:set #{name}"
   execute cmd

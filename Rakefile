@@ -47,8 +47,8 @@ namespace :deploy do
               cmd = "git push #{app} #{branch}:refs/heads/#{branch} -f"
               fail unless execute(cmd)
             end
-            fail unless heroku_command(account[:name], account[:apps], "ps:scale resque=0")
-            fail unless heroku_command(account[:name], account[:apps], "ps:scale resque=1")
+            fail unless heroku_stop_apps(account[:name], account[:apps], config[:scales])
+            fail unless heroku_start_apps(account[:name], account[:apps], config[:scales])
           end
         end
       end
@@ -114,8 +114,8 @@ end
         accounts = config[env][:accounts]
 
         accounts.each do |account|
-          fail unless heroku_command(account[:name], account[:apps], "ps:scale resque=0") if action == :stop || action == :restart
-          fail unless heroku_command(account[:name], account[:apps], "ps:scale resque=1") if action == :start || action == :restart
+          fail unless heroku_stop_apps(account[:name], account[:apps], config[:scales]) if action == :stop || action == :restart
+          fail unless heroku_start_apps(account[:name], account[:apps], config[:scales]) if action == :start || action == :restart
           fail unless heroku_command(account[:name], account[:apps], "ps") if action == :status
         end
       end
