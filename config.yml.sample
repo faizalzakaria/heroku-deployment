@@ -1,17 +1,37 @@
-tasks: [ 'service1' ]
 ---
-:service1:
-  :github: 'git@github.com:faizalzakaria/fbox.git'
+:analyticservice:
+  :github: 'git@github.com:faizalzakaria/gingerbread.git'
   :branch: 'master'
   :staging:
+    :envs:
     :accounts:
-      - :name: 'staging'
+      - :name: 'abc'
+        :ssh_key: ''
         :apps:
-          - 'staging-123'
+          - '123'
   :production:
+    :envs:
     :accounts:
-      - :name: 'production'
+      - :name: 'bdede'
+        :ssh_key: ''
         :apps:
-          - 'production-1'
-          - 'production-2'
-          - 'production-3'
+          - '1234-1'
+          - '1234-2
+:pushservice:
+  :github: 'git@github.com:faizalzakaria/conard.git'
+  :branch: 'master'
+  :staging:
+    :envs:
+    :accounts:
+      - :name: 'ginger'
+        :ssh_key: ''
+        :apps:
+          - 'server-1'
+  :production:
+    :envs: []
+    :accounts:
+      - :name: 'bread'
+        :ssh_key: ''
+        :apps:
+          - 'server-prod-1'
+          - 'server-prod-2'
