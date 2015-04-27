@@ -11,6 +11,15 @@ def config_file_missing
 end
 
 def load_config(config_file)
-  fail config_file_missing unless File.exist? config_file
+  check_config_file config_file
   $config = YAML.load(File.read(config_file))
+end
+
+def dump_config(config_file, data)
+  check_config_file config_file
+  File.open(config_file, 'w') { |f| YAML.dump(data, f) }
+end
+
+def check_config_file(config_file)
+  fail config_file_missing unless File.exist? config_file
 end
