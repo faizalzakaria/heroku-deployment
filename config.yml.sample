@@ -1,37 +1,34 @@
----
-:analyticservice:
-  :github: 'git@github.com:faizalzakaria/gingerbread.git'
+:tasks: [ idonethis, vinti ]
+:idonethis:
+  :github: 'git@github.com:faizalzakaria/idonethis.git'
   :branch: 'master'
+  :scales: ['web']
   :staging:
     :envs:
+      TEST1: 'test'
+      TEST2: 'test'
     :accounts:
-      - :name: 'abc'
-        :ssh_key: ''
+      - :name: 'phaibusiness'
         :apps:
-          - '123'
+          - 'idonethis3'
+  :production:
+    :accounts:
+      - :name: 'phaibusiness'
+        :apps:
+          - 'idonethis-prod'
+:vinti:
+  :github: 'git@github.com:faizalzakaria/vinti.git'
+  :branch: 'master'
+  :scales: ['web']
+  :staging:
+    :branch: 'master1'
+    :accounts:
+      - :name: 'phaibusiness'
+        :apps:
+          - 'vinti'
   :production:
     :envs:
     :accounts:
-      - :name: 'bdede'
-        :ssh_key: ''
+      - :name: 'phaibusiness'
         :apps:
-          - '1234-1'
-          - '1234-2
-:pushservice:
-  :github: 'git@github.com:faizalzakaria/conard.git'
-  :branch: 'master'
-  :staging:
-    :envs:
-    :accounts:
-      - :name: 'ginger'
-        :ssh_key: ''
-        :apps:
-          - 'server-1'
-  :production:
-    :envs: []
-    :accounts:
-      - :name: 'bread'
-        :ssh_key: ''
-        :apps:
-          - 'server-prod-1'
-          - 'server-prod-2'
+          - 'vinti-prod-1'

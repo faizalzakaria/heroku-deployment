@@ -1,5 +1,5 @@
 require 'rake'
-require_relative 'config'
+require_relative 'lib/config'
 require_relative 'lib/helpers'
 
 $DIR = {}
@@ -25,6 +25,7 @@ namespace :deploy do
       # Clone the project in dir
       Dir.chdir(dir) do
         branch = config[:branch]
+        branch = config[env][:branch] if config[env][:branch]
         github = config[:github]
 
         unless File.directory?(project_dir)
