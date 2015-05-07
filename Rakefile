@@ -87,6 +87,7 @@ namespace :config do
 
         def envs(envs)
           output = ""
+          return output if envs.nil?
           envs.each_pair do |key, val|
             output << " #{key}=\"#{val}\""
           end
