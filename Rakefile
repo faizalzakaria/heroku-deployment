@@ -5,6 +5,8 @@ require_relative 'lib/helpers'
 $DIR = {}
 $config = load_config('config.yml')
 
+verify_prerequisites
+
 namespace :deploy do
   $config[:tasks].each do |service|
     service = service.to_sym

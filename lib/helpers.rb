@@ -1,5 +1,12 @@
 # Helper methods
 
+def verify_prerequisites
+  system 'heroku > /dev/null'
+  fail 'no heroku' if $?.exitstatus > 0
+  system 'heroku accounts > /dev/null'
+  fail 'no heroku accounts' if $?.exitstatus > 0
+end
+
 def trace_print(msg)
   puts "\033[1;32m[DEBUG]\033[0m #{msg}" if Rake.application.options.trace
 end
