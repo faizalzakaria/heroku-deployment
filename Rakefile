@@ -31,7 +31,7 @@ namespace :deploy do
         github = config[:github]
 
         unless File.directory?(project_dir)
-          cmd = "git clone #{github} #{service}"
+          cmd = "git clone #{github} -b #{branch} #{service}"
           fail unless execute(cmd)
         end
 
@@ -47,7 +47,8 @@ namespace :deploy do
               execute(cmd)
               fail unless heroku_switch(account[:name])
 
-              cmd = "git push #{app} #{branch}:refs/heads/#{branch} -f"
+              # Heroku always use master
+              cmd = "git push #{app} #{branch}:refs/heads/master -f"
               fail unless execute(cmd)
             end
             fail unless heroku_stop_apps(account[:name], account[:apps], config[:scales])
