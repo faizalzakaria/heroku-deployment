@@ -81,7 +81,7 @@ namespace :config do
   namespace :set do
     $config[:tasks].each do |service|
       service = service.to_sym
-      desc "config for #{service}"
+      desc "set config for #{service}"
       task service, [:env] do |_, args|
 
         config = $config[service]
@@ -100,6 +100,33 @@ namespace :config do
 
         accounts.each do |account|
           fail unless heroku_command(account[:name], account[:apps], "config:set #{envs(config[env][:envs])}")
+        end
+      end
+    end
+  end
+
+  namespace :unset do
+    $config[:tasks].each do |service|
+      service = service.to_sym
+      desc "unset config for #{service}"
+      task service, [:env] do |_, args|
+
+        config = $config[service]
+        env = guess_env(args[:env])
+        print_g "MODE: #{env}"
+        accounts = config[env][:accounts]
+
+        def envs(envs)
+          output = ""
+          return output if envs.nil?
+          envs.each_pair do |key, val|
+            output << " #{key}"
+          end
+          output
+        end
+
+        accounts.each do |account|
+          fail unless heroku_command(account[:name], account[:apps], "config:unset #{envs(config[env][:envs])}")
         end
       end
     end
